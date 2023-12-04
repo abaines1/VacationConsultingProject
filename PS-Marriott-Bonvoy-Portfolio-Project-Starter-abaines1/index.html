@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <title>Marriott Bonvoy Homes and Villas</title>
+
+    <!-- MAPBOX CDNS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <!-- BOOTSTRAP CSS CDNS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- NAVBAR START-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand ms-3 me-0" href="#">
+          <img
+            src="assets/images/logo.svg"
+            alt="Marriott Logo"
+            width="240"
+            height="60"
+            class="d-inline-block align-text-top"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown mx-1">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Destinations
+              </a>
+              <div id="mega-menu" class="dropdown-menu">
+                <ul id="mega-menu-col-1"></ul>
+                <ul id="mega-menu-col-2"></ul>
+              </div>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="#">Saved Homes</a>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="#">My Trips</a>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="#">About & FAQ</a>
+            </li>
+          </ul>
+          <li class="nav-item mx-1 d-flex">
+            <i class="bi bi-person-circle me-2"></i
+            ><a class="nav-link" id="sign-in-link" href="#">Sign in</a>
+          </li>
+        </div>
+      </div>
+    </nav>
+    <!-- NAVBAR END-->
+    <!-- JUMBOTRON START -->
+    <section id="jumbotron" class="bg-body-tertiary">
+      <div class="container-fluid p-5 text-light">
+        <h1 class="display-2 col-md-8">Where will your travel take you?</h1>
+        <p class="col-md-8 fs-4">
+          Discover our growing collection of whole home rentals.
+        </p>
+        <!-- <button
+          class="btn btn-outline-light btn-lg jumbotron-button"
+          type="button"
+        >
+          SEARCH HOMES
+        </button> -->
+      </div>
+    </section>
+    <!-- JUMBOTRON END -->
+    <!-- DATEPICKER START -->
+    <section class="container my-5">
+      <div id="search-area" class="row">
+        <div class="col-12 col-md-5 my-2">
+          <label for="destination" class="form-label fw-bold"
+            >DESTINATION</label
+          >
+          <div class="input-group">
+            <span class="input-group-text" id="cal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-geo-alt"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"
+                />
+                <path
+                  d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                />
+              </svg>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Where to?"
+              aria-label="Where to?"
+              aria-describedby="cal"
+              id="destination"
+            />
+          </div>
+        </div>
+        <div class="col-12 col-md-5 my-2">
+          <label for="dates" class="form-label fw-bold">DATES (OPTIONAL)</label>
+          <div class="input-group">
+            <span class="input-group-text" id="cal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-calendar"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                ></path>
+              </svg>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Any Dates"
+              aria-label="Any Dates"
+              aria-describedby="cal"
+              id="dates"
+            />
+          </div>
+        </div>
+        <div
+          class="col-12 col-md-2 d-flex justify-content-center align-items-end my-2"
+        >
+          <button
+            id="search-homes-button"
+            type="submit"
+            class="btn btn-secondary disabled"
+          >
+            SEARCH
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- DATEPICKER END -->
+    <!-- RECOMMENDED DESTINATIONS START -->
+    <section class="container my-5 px-4">
+      <h3>Recommended for You</h3>
+      <div
+        id="recommendations"
+        class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 mt-2"
+      >
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/nashville.jpg"
+              class="card-img-top h-100"
+              alt="nashville"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Nashville</h5>
+              <p class="card-text">Tennessee</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/marco-island.jpg"
+              class="card-img-top h-100"
+              alt="marco island"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Marco Island</h5>
+              <p class="card-text">Florida</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/delray-beach.jpg"
+              class="card-img-top h-100"
+              alt="delray beach"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Delray Beach</h5>
+              <p class="card-text">Florida</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/big-sky.jpg"
+              class="card-img-top h-100"
+              alt="big sky"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Big Sky</h5>
+              <p class="card-text">Montana</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/bass-lake.jpg"
+              class="card-img-top h-100"
+              alt="bass lake"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Bass Lake</h5>
+              <p class="card-text">California</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/atlanta.jpg"
+              class="card-img-top h-100"
+              alt="atlanta"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Atlanta</h5>
+              <p class="card-text">Georgia</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/algarve.jpg"
+              class="card-img-top h-100"
+              alt="algarve"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Algarve</h5>
+              <p class="card-text">Portugal</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="assets/images/popular-destinations/bali.jpg"
+              class="card-img-top h-100"
+              alt="bali"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Bali</h5>
+              <p class="card-text">Indonesia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- RECOMMENDED DESTINATIONS END-->
+    <!-- MAPBOX START -->
+    <section>
+      <div id="map" style="width: 100%; height: 500px"></div>
+    </section>
+    <!-- MAPBOX END -->
+    <!-- FOOTER START -->
+    <section class="container">
+      <footer
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-4 pt-5 my-5 border-top"
+      >
+        <div class="col mb-3">
+          <a
+            href="#"
+            class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none"
+          >
+            <img
+              src="assets/images/logo.svg"
+              alt="Homes &amp; Villas by Marriott Bonvoy"
+              width="100%"
+              height="100%"
+            />
+          </a>
+          <p class="text-body-secondary">© 2023</p>
+        </div>
+
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Destinatinons</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Search Homes</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary">Offers</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Collection Pages</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="col mb-3">
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Marriott.com</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Marriott Bonvoy</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Tours & Activities</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="#" class="nav-link p-0 text-body-secondary"
+                >Connectivity Partners</a
+              >
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </section>
+    <!-- FOOTER END -->
+
+    <!-- BOOTSTRAP JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="places.js"></script>
+    <script src="script.js"></script>
+    <script src="provided.js"></script>
+  </body>
+</html>
